@@ -12,25 +12,18 @@
    console.log(cityDetails);
 
    // Time
-   const time = `${weather.LocalObservationDateTime}`;
-   const date = new Date(time);
+const dateTimeString = weather.LocalObservationDateTime;
+const dateTime = new Date(dateTimeString);
 
-   const day = date.getDate().toString().padStart(2, '0');
-   const month = (date.getMonth() + 1).toString().padStart(2, '0');
-   const year = date.getFullYear().toString();
-   const hours = date.getHours().toString().padStart(2, '0');
-   const minutes = date.getMinutes().toString().padStart(2, '0');
-   const seconds = date.getSeconds().toString().padStart(2, '0');
+// Extract the hours
+const hours = dateTime.getHours();
+const amOrPm = hours >= 12 ? "p.m." : "a.m.";
 
-   // Extract the timezone offset in hours and minutes
-   const tzOffsetHours = Math.floor(Math.abs(date.getTimezoneOffset()) / 60);
-   const tzOffsetMinutes = Math.abs(date.getTimezoneOffset()) % 60;
-   const tzSign = date.getTimezoneOffset() < 0 ? "+" : "-";
+// Convert hours to 12-hour format
+const hours12 = hours % 12 || 12;
 
-   const tzFormatted = `${tzSign}${tzOffsetHours.toString().padStart(2, '0')}:${tzOffsetMinutes.toString().padStart(2, '0')}`;
-
-   const output1 = `${day}/${month}/${year}`;
-
+// Construct the human-readable format
+const humanReadableFormat = `${hours12} ${amOrPm}`;
    // Icon update
    const IconSrc = `Assets/Icons/${weather.WeatherIcon}.png`;
    icon.setAttribute('src', IconSrc);
@@ -46,7 +39,7 @@
     <ion-icon name="locate-outline"></ion-icon>
     <p>Location: <span>${cityDetails.EnglishName}/${cityDetails.Country.EnglishName}</span></p>
     <hr>
-    <ion-icon name="time"></ion-icon><p> Time: <span>${timeSrc} ${output1}</span></p>
+    <ion-icon name="time"></ion-icon><p> Time: <span>${humanReadableFormat} ${timeSrc}</span></p>
     <hr>
     <ion-icon name="water-outline"></ion-icon>
     <p>humidity: <span>${weather.RelativeHumidity}%</span></p>
