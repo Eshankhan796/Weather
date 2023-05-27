@@ -8,7 +8,7 @@ Find me in:
 
 ## Screenshots.
 
-![Temperature](/Assets/screenshot/Screenshot_20230423-204317_Chrome.jpg)
+![Temperature](/Assets/screenshot/Screenshot_20230527-222759_Chrome.jpg)
 
 ---
 ### Thanks to ❤️:
