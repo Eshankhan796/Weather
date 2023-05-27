@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
+  <link rel="icon" href="/Assets/Favicon/Favicon.png">
+  <!--css-->
+<style>
+  @font-face {
+  font-family: "Rimouski";
+  src: url("/Assets/fonts/rimouski sb.ttf") format(TrueType);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  background-color: #2c2a38;
+  font-family: Rimouski;
+  height: 100vh;
+
+}
+
+.main-weather {
+  padding-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: auto;
+}
+
+.main {
+  background-color: #f4f9ff;
+  width: 86%;
+  border-radius: 18px;
+  padding: 20px 23px;
+}
+
+.tit-le {
+  border-radius: 18px;
+  background-color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.tit-le p {
+  color: #2a3352;
+  font-size: 38px;
+}
+
+.search-box {
+  width: 100%;
+  height: min-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-box form input {
+  color: #2a3352;
+  font-size: 19px;
+  font-weight: 500;
+  width: 90%;
+  height: 30px;
+  text-transform: capitalize;
+  padding-left: 20px;
+  border-radius: 5px;
+  border: none;
+  margin-left: 15px;
+}
+
+.search-box form input::placeholder {
+  font-size: 20px;
+  font-weight: 500;
+  color: #dadfe2;
+  text-transform: capitalize;
+}
+
+.search-box .icon-location {
+  position: absolute;
+  color: #2a3352;
+  font-size: 20px;
+  margin-left: 15px
+}
+
+.main-icon,
+.temperature {
+  text-align: center;
+}
+
+.main-icon img {
+  width: 50%;
+  margin-top: 12px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.temperature {
+  position: relative;
+  color: #2a3352;
+  font-size: 56px;
+  font-weight: 800;
+  margin-top: 5px;
+}
+
+.temperature span {
+  position: relative;
+  font-size: 48px;
+  margin-left: 12px;
+}
+
+.temperature .weather-status {
+  font-size: 16px;
+  color: #2a3352;
+}
+
+.details p {
+  color: #2a3352;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -2px;
+}
+.details span {
+  text-align: end;
+}
+.details ion-icon {
+  font-size: 22px;
+  margin-left: 12px;
+  margin-top: 7px;
+  color: #2a3352;
+}
+
+.details hr {
+  margin-top: 2px;
+}
+
+footer {
+  margin: auto;
+  margin-top: auto;
+}
+
+.line {
+  margin: auto;
+  background-color: #FF005E;
+  height: 3px;
+  width: 15%;
+  border-radius: 20px;
+  border: 1px solid #FF005E;
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+
+.Text1 {
+  text-align: center;
+  font-family: 'Rimouski';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  margin: auto;
+  margin-bottom: 13px;
+  color: #B3BECD;
+}
+
+.Text2 {
+  text-align: center;
+  text-decoration: none;
+  margin: auto;
+  margin-bottom: 8px;
+  font-family: 'Rimouski';
+  font-weight: 400;
+  font-size: 12px;
+  font-style: normal;
+  color: #B3BECD;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.Text3 {
+  text-align: center;
+  margin: auto;
+  font-family: 'Rimouski';
+  font-weight: 800;
+  line-height: 15px;
+  font-size: 12px;
+  font-style: normal;
+  color: #B3BECD;
+  text-transform: uppercase;
+}
+
+.Text4 {
+  text-align: center;
+  margin: auto;
+  font-family: 'Rimouski';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #B3BECD;
+}
+
+.Text4 a {
+  text-decoration: none;
+  font-family: 'Rimouski';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #B3BECD;
+}
+
+.Text5 {
+  text-align: center;
+  font-family: 'Rimouski';
+  font-style: normal;
+  margin: auto;
+  margin-bottom: 30px;
+  color: #B3BECD;
+}
+
+.copyright {
+  text-align: center;
+  margin: auto;
+  font-family: 'Rimouski';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 15px;
+  color: #B3BECD;
+}
+
+.social-icon {
+  font-size: 17px;
+  color: #B3BECD;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 1px;
+}
+</style>
+  <title>MRK Weather</title>
+</head>
+
+<body>
+  <div class="main-weather">
+    <div class="main">
+      <div class="tit-le">
+        <p>Weather</p>
+      </div>
+      <div class="search-box">
+        <ion-icon class="icon-location" name="location"></ion-icon>
+        <form>
+          <label for="city"></label>
+          <input name="city" type="text" placeholder="ENTER YOUR LOCATION">
+        </form>
+      </div>
+      <div class="weather-box">
+        <div class="main-icon">
+          <img src="/Assets/Icons/Cloud error.png">
+        </div>
+        <div class="temperature">
+          <p><span>-</span>°C</p>
+          <p class="weather-status">Enter Your location &#3232&#x5F&#xCA0</p>
+        </div>
+        <div class="details">
+          <ion-icon name="locate-outline"></ion-icon>
+          <p>Location: <span>&#xAF&#x5C&#x5F⁠&#x28&#x30C4&#x29&#x5F&#x2F&#xAF</span></p>
+          <hr>
+          <ion-icon name="time"></ion-icon>
+          <p>Time: <span>&#xAF&#x5C&#x5F⁠&#x28&#x30C4&#x29&#x5F&#x2F&#xAF</span></p>
+          <hr>
+          <ion-icon name="water-outline"></ion-icon>
+          <p>humidity: <span>&#xAF&#x5C&#x5F⁠&#x28&#x30C4&#x29&#x5F&#x2F&#xAF</span></p>
+          <hr>
+          <ion-icon name="compass"></ion-icon>
+          <p>Wind: <span>&#xAF&#x5C&#x5F⁠&#x28&#x30C4&#x29&#x5F&#x2F&#xAF</span></p>
+          <hr />
+          <ion-icon name="skull-outline"></ion-icon>
+          <p>UV Index: <span>&#xAF&#x5C&#x5F⁠&#x28&#x30C4&#x29&#x5F&#x2F&#xAF</span></p>
+          <hr>
+          <ion-icon name="eye"></ion-icon>
+          <p>visibility: <span>&#xAF&#x5C&#x5F⁠&#x28&#x30C4&#x29&#x5F&#x2F&#xAF</span></p>
+        </div>
+      </div>
+    </div>
+  </div class="main-weather">
+  <!-- footer start -->
+  <footer>
+    <hr class="line">
+    <h4 class="Text5">TEAM MRK</h4>
+    <p class="Text1">Find an issue with this page? <span>Fix it on <a class="Text2" target="_blank" href="https://github.com/Eshankhan796/Weather">GitHub</a>.</span></p>
+    <p class="Text2">Need help? Email <a class="Text2" href="mailto:mrkhidden64@gmail.com,khaneshan796@gmail.com?subject=Hello%20MRK%20I%20Need%20Help&body=Write%20here%20your%20request" target="_top">mrkhidden64@gmail.com</a></p>
+    <div class="social-icon">
+      <a class="social-icon" target="_blank" href="https://github.com/Eshankhan796"><ion-icon class="social-icon" name="logo-github"></ion-icon></a>
+      <a class="social-icon" target="_blank" href="https://www.facebook.com/siddek.ek.796?mibextid=ZbWKwL"><ion-icon class="social-icon" name="logo-facebook"></ion-icon></a>
+      <a class="social-icon" target="_blank" href="https://discord.com/users/823495729841831947"><ion-icon class="social-icon" name="logo-discord"></ion-icon></a>
+    </div>
+    <p class="Text3"><strong>special thanks to</strong></p>
+    <p class="Text4"><a target="blank" href="https://www.accuweather.com">AccuWeather</a> | <a href="https://developer.accuweather.com/" target="blank">AccuWeather API</a> | <a href="https://ionic.io/ionicons/" target="blank">IonIcons</a> | <a href="https://editor.method.ac/" target="blank">Method Draw</a> | <a href="https://spck.io/" target="blank">Spck</a></p>
+    <p class="copyright">Copyright ©️ 2023 Eshan khan</p>
+  </footer>
+  <script src="weather.js"></script>
+  <script src="main.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
