@@ -1,77 +1,72 @@
- // Const
- const searchInput = document.querySelector('.search-form');
- const mainIcon = document.querySelector('.main-icon');
- const details = document.querySelector('.details');
- const temperature = document.querySelector('.temperature');
- const icon = document.querySelector('.main-icon img');
- 
- // Getting the data for UI update
- const updateUI = (data) => {
-   const { cityDetails, weather } = data;
-   // Time
-   const dateTimeString = weather.LocalObservationDateTime;
-   const dateTime = new Date(dateTimeString);
-   // Extract the hours
-   const hours = dateTime.getHours();
-   const amOrPm = hours >= 12 ? "p.m." : "a.m.";
-   // Convert hours to 12-hour format
-   const hours12 = hours % 12 || 12;
-   // Construct the human-readable format
-   const humanReadableFormat = `${hours12} ${amOrPm}`;
-   // Icon update
-   const IconSrc = `Assets/Icons/${weather.WeatherIcon}.png`;
-   icon.setAttribute('src', IconSrc);
-   // Day time or night time ?
-   let timeSrc = weather.IsDayTime ? 'Day' : 'Night';
-   // Temperature updateUI update 
-   temperature.innerHTML = `
-   <p>
-   <span>${weather.RealFeelTemperature.Metric.Value}
-   </span>°${weather.RealFeelTemperature.Metric.Unit}
-   <p style="font-size: 20px;">
-   <span style="font-size: 20px;">${weather.RealFeelTemperature.Imperial.Value}
-   </span>°${weather.RealFeelTemperature.Imperial.Unit}
-   </p>
-   </p>
-   <p class="weather-status">${weather.WeatherText}</p>
-    `;
-   // Other details update 
-   details.innerHTML = `
+// Constants
+const searchForm = document.querySelector('.search-form');
+const mainIcon = document.querySelector('.main-icon img');
+const temperature = document.querySelector('.temperature');
+const details = document.querySelector('.details');
+
+// Function to update the UI with weather data
+function updateUI(cityDetails, weather) {
+  const dateTime = new Date(weather.LocalObservationDateTime);
+  const hours = dateTime.getHours() % 12 || 12;
+  const amOrPm = dateTime.getHours() >= 12 ? 'p.m.' : 'a.m.';
+  const humanReadableTime = `${hours} ${amOrPm}`;
+  const iconSrc = `Assets/Icons/${weather.WeatherIcon}.png`;
+
+  mainIcon.setAttribute('src', iconSrc);
+
+  temperature.innerHTML = `
+    <p>
+    <span>${weather.RealFeelTemperature.Metric.Value}
+    </span>°${weather.RealFeelTemperature.Metric.Unit}
+    </p>
+    <p style="font-size: 20px;">
+    <span style="font-size: 20px;">${weather.RealFeelTemperature.Imperial.Value}
+    </span>°${weather.RealFeelTemperature.Imperial.Unit}
+    </p>
+    <p class="weather-status">${weather.WeatherText}
+    </p>
+  `;
+
+  details.innerHTML = `
     <ion-icon name="locate-outline"></ion-icon>
     <p>Location: <span>${cityDetails.EnglishName}/${cityDetails.Country.EnglishName}</span></p>
     <hr>
-    <ion-icon name="time"></ion-icon><p> Time: <span>${humanReadableFormat} ${timeSrc}</span></p>
+    <ion-icon name="time"></ion-icon>
+    <p>Time: <span>${humanReadableTime} ${weather.IsDayTime ? 'Day' : 'Night'}</span></p>
     <hr>
     <ion-icon name="water-outline"></ion-icon>
-    <p>humidity: <span>${weather.RelativeHumidity}%</span></p>
+    <p>Humidity: <span>${weather.RelativeHumidity}%</span></p>
     <hr>
     <ion-icon name="leaf"></ion-icon>
     <p>Wind: <span>${weather.Wind.Direction.English} ${weather.Wind.Speed.Metric.Value} ${weather.Wind.Speed.Metric.Unit}</span></p>
-    <hr/>
+    <hr>
     <ion-icon name="skull-outline"></ion-icon>
     <p>UV Index: <span>${weather.UVIndex} (${weather.UVIndexText})</span></p>
     <hr>
     <ion-icon name="eye"></ion-icon>
-    <p>visibility: <span>${weather.Visibility.Metric.Value} ${weather.Visibility.Metric.Unit}</span></p>
-      `;
- }
+    <p>Visibility: <span>${weather.Visibility.Metric.Value} ${weather.Visibility.Metric.Unit}</span></p>
+  `;
+}
 
- // Getting the input and weather data
- const updateCity = async (city) => {
+// Function to update city and weather data
+async function updateCity(city) {
+  try {
+    const cityDetails = await getCity(city);
+    const weather = await getWeather(cityDetails.Key);
+    return { cityDetails, weather };
+  } catch (error) {
+    throw new Error(`Error: ${error.message}`);
+  }
+}
 
-   const cityDetails = await getCity(city);
-   const weather = await getWeather(cityDetails.Key);
-
-   return { cityDetails, weather };
- }
-
- // User input
- searchInput.addEventListener('submit', e => {
-   e.preventDefault();
-   const city = searchInput.city.value.trim();
-   updateCity(city)
-     .then(data => updateUI(data))
-     .catch(err => {
-       alert(`"${city}" City Not Found. Sorry, Something Went Worng.`);
-     });
- });
+// Event listener for form submission
+searchForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const city = searchForm.city.value.trim();
+  try {
+    const data = await updateCity(city);
+    updateUI(data.cityDetails, data.weather);
+  } catch (error) {
+    alert(`"${city}" City Not Found. Sorry, Something Went Wrong.`);
+  }
+});

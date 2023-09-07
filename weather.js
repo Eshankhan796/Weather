@@ -1,25 +1,39 @@
- const key = 'knYA2B0n2ojJrDAWVAptaCxGuxUYvckj';
+const apiKey = 'GS2zBSjaAmBysuhkPIAaUCPpdHS8XpkS';
 
- // Get Weather information 
- const getWeather = async (id) => {
+// Get Weather information
+const getWeather = async (id) => {
+  try {
+    const baseUrl = 'http://dataservice.accuweather.com/currentconditions/v1/';
+    const url = `${baseUrl}${id}?apikey=${apiKey}&details=True`;
 
-   const base = 'http://dataservice.accuweather.com/currentconditions/v1/';
-   const queryText = `${id}?apikey=${key}&details=True`;
+    const response = await fetch(url);
 
-   const response = await fetch(base + queryText);
-   const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
 
-   return data[0];
- };
+    const data = await response.json();
+    return data[0];
+  } catch (error) {
+    throw new Error(`Error: ${error.message}`);
+  }
+};
 
- // Get city key and information 
- const getCity = async (city) => {
+// Get city key and information
+const getCity = async (city) => {
+  try {
+    const baseUrl = 'http://dataservice.accuweather.com/locations/v1/cities/search';
+    const url = `${baseUrl}?apikey=${apiKey}&q=${city}`;
 
-   const base = 'http://dataservice.accuweather.com/locations/v1/cities/search';
-   const queryText = `?apikey=${key}&q=${city}`;
+    const response = await fetch(url);
 
-   const response = await fetch(base + queryText);
-   const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
 
-   return data[0];
- };
+    const data = await response.json();
+    return data[0];
+  } catch (error) {
+    throw new Error(`Error: ${error.message}`);
+  }
+};
