@@ -72,11 +72,11 @@
       border-radius: 5px;
     }
 
-    .search-form input {
+    .search-input {
       font-family: Rimouski;
       padding: 5px 5px 5px 25px;
       text-transform: capitalize;
-      max-width: 500px;
+      min-width: 190px;
       width: 320px;
       background: #fff;
       color: #2c2a38;
@@ -86,11 +86,11 @@
       outline: none;
     }
 
-    .search-form input:hover {
+    .search-input:hover {
       border-color: #d7374a;
     }
 
-    .search-form input:focus {
+    .search-input:focus {
       border-color: #d7374a;
     }
 
@@ -107,7 +107,7 @@
       text-align: center;
     }
 
-    .main-icon img {
+    #weather-icon {
       width: 50%;
       margin-top: 12px;
       pointer-events: none;
@@ -227,13 +227,13 @@
       <div class="search-box">
         <form class="search-form">
           <ion-icon class="location-icon" name="location"></ion-icon>
-          <input name="city" type="text" placeholder="ENTER CITY NAME">
+          <input class="search-input" name="city" type="text" placeholder="ENTER CITY NAME">
           <button type="submit"><strong>Search</strong></button>
         </form>
       </div>
       <div class="weather-box">
         <div class="main-icon">
-          <img src="/Assets/Icons/Cloud error.png">
+          <img id="weather-icon" src="/Assets/Icons/Cloud error.png">
         </div>
         <div class="temperature">
           <p><span>-</span>°C</p>
@@ -278,9 +278,7 @@
     <p style="font-size: 12px; margin-bottom: 12px; color: #B3BECD;"><strong>Made with &#x2764; by Eshan khan</strong></p>
     <p style="font-size: 11px; color: #B3BECD;"><strong>Copyright ©️ 2023</strong></p>
   </footer>
-  <script src="weather.js"></script>
   <script src="main.js"></script>
-  <script src="secret.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
