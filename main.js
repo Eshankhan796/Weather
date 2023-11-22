@@ -1,6 +1,35 @@
-const apiKey = 'GS2zBSjaAmBysuhkPIAaUCPpdHS8XpkS';
+const apiKey = 'R7pXM0aMjHDnAHbBfPt6bjYbHeKguZ6G';
 const SearchQuery = document.querySelector('.search-form');
 const SearchInput = document.querySelector('.search-input');
+const successCallback = (lat_lon) => {
+  PreWeather(lat_lon);
+};
+const errorCallback = (errorMsge) => {
+  alert("Can't get your Current location weather, please turn on the location")
+}
+window.onload = () => {
+  getGeolocation()
+};
+
+function getGeolocation() {
+  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+}
+
+function PreWeather(data) {
+  const latitude = data.coords.latitude;
+  const longitude = data.coords.longitude;
+  console.log(latitude, longitude);
+  const GeoURL = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${latitude}%2C${longitude}&details=true&toplevel=true`;
+
+  fetch(GeoURL)
+    .then(res => res.json())
+    .then(data => {
+      weatherSearch(data);
+    })
+    .catch(err => {
+      alert('Sorry error: ' + err)
+    })
+};
 
 
 SearchQuery.addEventListener('submit', async (event) => {
@@ -28,7 +57,6 @@ function weatherSearch(City) {
     .then(res => res.json())
     .then(data => {
       const weather = data[0];
-      console.log(weather);
       const dateTime = new Date(weather.LocalObservationDateTime);
       const hours = dateTime.getHours() % 12 || 12;
       const amOrPm = dateTime.getHours() >= 12 ? 'p.m.' : 'a.m.';
