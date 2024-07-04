@@ -1,4 +1,4 @@
-const apiKey = 'R7pXM0aMjHDnAHbBfPt6bjYbHeKguZ6G';
+const apiKey = 'GET_YOUR_KEY_FROM_https://developer.accuweather.com/';
 const SearchQuery = document.querySelector('.search-form');
 const SearchInput = document.querySelector('.search-input');
 const successCallback = (lat_lon) => {
